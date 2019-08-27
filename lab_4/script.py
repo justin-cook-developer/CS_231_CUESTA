@@ -1,3 +1,7 @@
+# Justin Cook / justin_cook3@my.cuesta.edu
+# CIS 231 / Scovil
+# Lab 4
+
 import math
 
 
@@ -27,6 +31,7 @@ def hypotenuse(a, b):
 
 print(hypotenuse(3, 4))  # expect 5
 print(hypotenuse(1, 2))  # expect 5 ^ 1/2
+print(hypotenuse(1, 1))  # expect 2 ^ 1/2
 
 
 def quadratic(a, b, c):
@@ -38,3 +43,5 @@ def quadratic(a, b, c):
 
 
 print(quadratic(1, 3, -4))  # expect [1, -4]
+print(quadratic(1, 9, 1))   # expect [-0.1125, -8.887]
+print(quadratic(1, 7, 2))   # expect [-0.298, -6.701]
