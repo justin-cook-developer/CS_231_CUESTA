@@ -1,8 +1,7 @@
 from typing import Any, TypeVar
-import os
 import unittest
 
-# ----- CUSTOM TYPES; JUST FOR FUN -----
+# ----- CUSTOM TYPE; JUST FOR FUN -----
 MinMax = TypeVar('MinMax', int, None)
 
 
@@ -56,6 +55,21 @@ def average(total: int, n: int) -> float:
     return round(avg, 2)
 
 
+def factorial(integer: int) -> int:
+    if isInt(integer) == False:
+        raise TypeError('integer must be of type int')
+    elif integer < 0:
+        raise ValueError('integer must be >= 0')
+    else:
+        fact = 1
+
+        while (integer > 0):
+            fact = fact * integer
+            integer -= 1
+
+        return fact
+
+
 # I am pretty getIntegerInput() could, in theory, "overflow" the callstack,
 # but I am going to make positive assumptions about user input
 def getIntegerInput() -> int:
@@ -101,12 +115,22 @@ def partOne():
         print('No valid numbers entered')
 
 
-# ----- INVOKE METHODS -----
-partOne()
+def partTwo():
+    for i in range(5):
+        value = None
+
+        while(value == None):
+            integer = getIntegerInput()
+
+            if integer >= 0:
+                value = integer
+
+        print('factorial(' + str(value) + '): ', factorial(value))
 
 
-# ----- TESTS FOR NON-SIDE-AFFECT FUNCTIONS;
-# RUN 'python3 -m unittest script.py' THEN ENTER -1, TESTS FOLLOW -----
+# ----- TESTS FOR NON-SIDE-AFFECT FUNCTIONS -----
+# RUN 'python3 -m unittest script.py'
+# TESTS RUN AFTER partOne AND partTwo are executed
 class TestIsInt(unittest.TestCase):
     def testReturnsTrueForIntegers(self):
         self.assertTrue(isInt(5))
@@ -141,7 +165,6 @@ class TestCalculateMin(unittest.TestCase):
 
 
 class TestAverage(unittest.TestCase):
-
     def testReturnsAFloat(self):
         self.assertTrue(isinstance(average(2, 1), float))
         self.assertTrue(isinstance(average(5, 2), float))
@@ -159,3 +182,27 @@ class TestAverage(unittest.TestCase):
     def testNMustBeGreaterThanZero(self):
         self.assertRaises(ValueError, average, 1, 0)
         self.assertRaises(ValueError, average, 1, -1)
+
+
+class TestFactorial(unittest.TestCase):
+    def testThrowsTypeErrors(self):
+        self.assertRaises(TypeError, factorial, '1')
+        self.assertRaises(TypeError, factorial, None)
+
+    def testOnlyTakesNonNegInts(self):
+        self.assertRaises(ValueError, factorial, -1)
+        self.assertRaises(ValueError, factorial, -5)
+
+    def testReturnsTheFactorialOfAnIntegerInput(self):
+        self.assertEqual(factorial(0), 1)
+        self.assertEqual(factorial(1), 1)
+        self.assertEqual(factorial(2), 2)
+        self.assertEqual(factorial(4), 24)
+
+
+# ----- INVOKE METHODS -----
+print('----- PART ONE -----')
+partOne()
+
+print('----- PART TWO -----')
+partTwo()
