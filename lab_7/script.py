@@ -2,8 +2,8 @@ from typing import Any, TypeVar
 import math
 import unittest
 
-# ----- TYPES -----
-MinMax = TypeVar('CMax', int, None)
+# ----- CUSTOM TYPES; JUST FOR FUN -----
+MinMax = TypeVar('MinMax', int, None)
 
 
 # ----- FUNCTIONS -----
@@ -13,7 +13,18 @@ def isInt(value: Any) -> bool:
     return isinstance(value, int)
 
 
+def isMinMax(val: Any) -> bool:
+    valid = isInt(val) or val == None
+    return valid
+
+
 def calculateMax(currentMax: MinMax, val: int) -> int:
+    if isMinMax(currentMax) == False:
+        raise TypeError('currentMax must be of type MinMax')
+
+    if isInt(val) == False:
+        raise TypeError('val must be of type int')
+
     if currentMax == None:
         return val
     else:
@@ -21,6 +32,12 @@ def calculateMax(currentMax: MinMax, val: int) -> int:
 
 
 def calculateMin(currentMin: MinMax, val: int) -> int:
+    if isMinMax(currentMin) == False:
+        raise TypeError('currentMin must be of type MinMax')
+
+    if isInt(val) == False:
+        raise TypeError('val must be of type int')
+
     if currentMin == None:
         return val
     else:
@@ -82,13 +99,15 @@ def partOne():
         )
         print('The largest non-negative integer entered is: ', max)
         print('The smallest non-negative integer entered is: ', min)
+    else:
+        print('No valid numbers entered')
 
 
 # ----- INVOKE METHODS -----
 partOne()
 
 
-# ----- TESTS -----
+# ----- TESTS FOR NON-SIDE-AFFECT FUNCTIONS; RUN 'python3 -m unittest script.py' THEN ENTER -1 -----
 
 
 class TestIsInt(unittest.TestCase):
@@ -102,6 +121,26 @@ class TestIsInt(unittest.TestCase):
         self.assertFalse(isInt(None))
         self.assertFalse(isInt({}))
         self.assertFalse(isInt([]))
+
+
+class TestCalculateMax(unittest.TestCase):
+    def testReturnsTheMax(self):
+        self.assertEqual(calculateMax(None, 4), 4)
+        self.assertTrue(calculateMax(5, 4), 5)
+
+    def testThrowsTypeErrors(self):
+        self.assertRaises(TypeError, calculateMax, '1', 2)
+        self.assertRaises(TypeError, calculateMax, None, '3')
+
+
+class TestCalculateMin(unittest.TestCase):
+    def testReturnsTheMax(self):
+        self.assertEqual(calculateMin(None, 4), 4)
+        self.assertTrue(calculateMin(5, 4), 4)
+
+    def testThrowsTypeErrors(self):
+        self.assertRaises(TypeError, calculateMin, '1', 2)
+        self.assertRaises(TypeError, calculateMin, None, '3')
 
 
 class TestAverage(unittest.TestCase):
