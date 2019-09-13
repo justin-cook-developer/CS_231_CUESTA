@@ -1,11 +1,30 @@
+from typing import Any, TypeVar
 import math
 import unittest
+
+# ----- TYPES -----
+MinMax = TypeVar('CMax', int, None)
+
 
 # ----- FUNCTIONS -----
 
 
-def isInt(value: int) -> bool:
+def isInt(value: Any) -> bool:
     return isinstance(value, int)
+
+
+def calculateMax(currentMax: MinMax, val: int) -> int:
+    if currentMax == None:
+        return val
+    else:
+        return max(currentMax, val)
+
+
+def calculateMin(currentMin: MinMax, val: int) -> int:
+    if currentMin == None:
+        return val
+    else:
+        return min(currentMin, val)
 
 
 def average(total: int, n: int) -> float:
@@ -22,7 +41,55 @@ def average(total: int, n: int) -> float:
     return round(avg, 2)
 
 
-# ----- TESTS - ----
+# I am pretty getIntegerInput() could, in theory, "overflow" the callstack,
+#  but I am going to make positive assumptions about user input
+def getIntegerInput() -> int:
+    inputValue = input('Please input an integer:\n')
+
+    try:
+        output = int(inputValue)
+        return output
+    except ValueError:
+        print('Inputs must be integers.')
+        return getIntegerInput()
+
+
+def partOne():
+    sum = 0
+    validInputs = 0
+    min = None
+    max = None
+
+    negativeInput = False
+
+    while(negativeInput == False):
+        integer = getIntegerInput()
+
+        if (integer < 0):
+            negativeInput = True
+        else:
+            sum += integer
+            validInputs += 1
+            max = calculateMax(max, integer)
+            min = calculateMin(min, integer)
+
+    if (validInputs > 0):
+        print('The sum of all non-negative integers is: ', sum)
+        print('The number of non-negative integers entered is: ', validInputs)
+        print(
+            'The average of all non-negative integers entered is: ',
+            average(sum, validInputs)
+        )
+        print('The largest non-negative integer entered is: ', max)
+        print('The smallest non-negative integer entered is: ', min)
+
+
+# ----- INVOKE METHODS -----
+partOne()
+
+
+# ----- TESTS -----
+
 
 class TestIsInt(unittest.TestCase):
     def testReturnsTrueForIntegers(self):
