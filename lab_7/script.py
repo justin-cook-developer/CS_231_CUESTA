@@ -4,11 +4,15 @@ import unittest
 # ----- FUNCTIONS -----
 
 
+def isInt(value: int) -> bool:
+    return isinstance(value, int)
+
+
 def average(total: int, n: int) -> float:
-    if isinstance(total, int) == False:
+    if isInt(total) == False:
         raise TypeError('Total must be of type int')
 
-    if isinstance(n, int) == False:
+    if isInt(n) == False:
         raise TypeError('n must be of type int')
 
     if n <= 0:
@@ -19,6 +23,18 @@ def average(total: int, n: int) -> float:
 
 
 # ----- TESTS - ----
+
+class TestIsInt(unittest.TestCase):
+    def testReturnsTrueForIntegers(self):
+        self.assertTrue(isInt(5))
+        self.assertTrue(isInt(2))
+        self.assertTrue(isInt(99))
+
+    def testReturnsFalseForNonIntegers(self):
+        self.assertFalse(isInt('5'))
+        self.assertFalse(isInt(None))
+        self.assertFalse(isInt({}))
+        self.assertFalse(isInt([]))
 
 
 class TestAverage(unittest.TestCase):
