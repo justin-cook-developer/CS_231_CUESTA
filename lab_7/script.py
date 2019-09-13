@@ -74,8 +74,6 @@ def factorial(integer: int) -> int:
         return fact
 
 
-# I am pretty getIntegerInput() could, in theory, "overflow" the callstack,
-# but I am going to make positive assumptions about user input
 def getIntegerInput() -> int:
     output = None
 
@@ -110,7 +108,7 @@ def partOne():
             min = calculateMin(min, integer)
 
     if (validInputs > 0):
-        print('The sum of all non-negative integers is: ', sum)
+        print('\nThe sum of all non-negative integers is: ', sum)
         print('The number of non-negative integers entered is: ', validInputs)
         print(
             'The average of all non-negative integers entered is: ',
@@ -119,7 +117,7 @@ def partOne():
         print('The largest non-negative integer entered is: ', max)
         print('The smallest non-negative integer entered is: ', min)
     else:
-        print('No valid numbers entered')
+        print('\nNo valid numbers entered')
 
 
 def partTwo():
@@ -132,7 +130,7 @@ def partTwo():
             if integer >= 0:
                 value = integer
 
-        print('factorial(' + str(value) + '): ', factorial(value))
+        print('\nfactorial(' + str(value) + '): ', factorial(value), '\n')
 
 
 # ----- TESTS FOR NON-SIDE-AFFECT FUNCTIONS -----
@@ -211,5 +209,5 @@ class TestFactorial(unittest.TestCase):
 print('----- PART ONE -----')
 partOne()
 
-print('----- PART TWO -----')
+print('\n----- PART TWO -----')
 partTwo()
