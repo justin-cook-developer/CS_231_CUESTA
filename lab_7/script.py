@@ -1,5 +1,5 @@
 from typing import Any, TypeVar
-import math
+import os
 import unittest
 
 # ----- CUSTOM TYPES; JUST FOR FUN -----
@@ -7,8 +7,6 @@ MinMax = TypeVar('MinMax', int, None)
 
 
 # ----- FUNCTIONS -----
-
-
 def isInt(value: Any) -> bool:
     return isinstance(value, int)
 
@@ -59,7 +57,7 @@ def average(total: int, n: int) -> float:
 
 
 # I am pretty getIntegerInput() could, in theory, "overflow" the callstack,
-#  but I am going to make positive assumptions about user input
+# but I am going to make positive assumptions about user input
 def getIntegerInput() -> int:
     inputValue = input('Please input an integer:\n')
 
@@ -107,9 +105,8 @@ def partOne():
 partOne()
 
 
-# ----- TESTS FOR NON-SIDE-AFFECT FUNCTIONS; RUN 'python3 -m unittest script.py' THEN ENTER -1 -----
-
-
+# ----- TESTS FOR NON-SIDE-AFFECT FUNCTIONS;
+# RUN 'python3 -m unittest script.py' THEN ENTER -1, TESTS FOLLOW -----
 class TestIsInt(unittest.TestCase):
     def testReturnsTrueForIntegers(self):
         self.assertTrue(isInt(5))
