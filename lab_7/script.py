@@ -1,3 +1,7 @@
+# Justin Cook / justin_cook3@my.cuesta.edu
+# CIS 231 / Scovil
+# Lab 7
+
 from typing import Any, TypeVar
 import unittest
 
@@ -73,14 +77,17 @@ def factorial(integer: int) -> int:
 # I am pretty getIntegerInput() could, in theory, "overflow" the callstack,
 # but I am going to make positive assumptions about user input
 def getIntegerInput() -> int:
-    inputValue = input('Please input an integer:\n')
+    output = None
 
-    try:
-        output = int(inputValue)
-        return output
-    except ValueError:
-        print('Inputs must be integers.')
-        return getIntegerInput()
+    while (isInt(output) == False):
+        inputValue = input('Please input an integer:\n')
+
+        try:
+            output = int(inputValue)
+        except ValueError:
+            print('Inputs must be integers.')
+
+    return output
 
 
 def partOne():
