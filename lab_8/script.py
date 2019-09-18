@@ -40,8 +40,8 @@ print(
     charCount('l', 'hello') == 2
 )
 print(
-    "charCount('b', 'brother') == 1 :",
-    charCount('b', 'brother') == 1
+    "charCount('z', 'brother') == 0 :",
+    charCount('z', 'brother') == 1
 )
 
 
