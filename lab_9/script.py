@@ -4,12 +4,12 @@ def getFloatInput():
 
 def printElemsFirstToLast(arr):
     for elem in arr:
-        print('\n', elem)
+        print('\n', "{:.1f}".format(elem))
 
 
 def printElemsLastToFirst(arr):
     for i in range(15):
-        print('\n', arr[14 - i])
+        print('\n', "{:.1f}".format(arr[14 - i]))
 
 
 def printHighestAndLowest(nums):
@@ -22,9 +22,9 @@ def printHighestAndLowest(nums):
         elif (highest == None or num > highest):
             highest = num
 
-    print('\n\nThe lowest number you inputted is:', lowest)
+    print('\n\nThe lowest number you inputted is:', "{:.1f}".format(lowest))
 
-    print('\nThe highest number you inputted is:', highest)
+    print('\nThe highest number you inputted is:', "{:.1f}".format(highest))
 
 
 def average(nums):
@@ -51,9 +51,9 @@ def printNumAboveBelowEqualAvg(nums):
         else:
             above += 1
 
-    print('\n\n', below, 'numbers are below the average')
-    print('\n', equal, 'numbers are equal to the average')
-    print('\n', above, 'numbers are above the average')
+    print('\n\n', "{:.1f}".format(below), 'numbers are below the average')
+    print('\n', "{:.1f}".format(equal), 'numbers are equal to the average')
+    print('\n', "{:.1f}".format(above), 'numbers are above the average')
 
 
 def main():
