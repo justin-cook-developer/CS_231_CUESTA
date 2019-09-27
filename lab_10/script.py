@@ -1,3 +1,8 @@
+# Justin Cook / justin_cook3@my.cuesta.edu
+# CIS 231 / Scovil
+# Lab 10
+
+
 def formatToOneDec(num):
     return "{:.1f}".format(num)
 
@@ -7,7 +12,7 @@ def get_num_values():
         'How many values would you like to input? Please enter a number between 2 and 15: '
     ))
 
-    while (numInputs < 2 or numInputs > 15):
+    while (numInputs < 1 or numInputs > 15):
         numInputs = int(input(
             '\nHow many values would you like to input? Please enter a number between 2 and 15: '
         ))
@@ -18,7 +23,7 @@ def get_num_values():
 def input_nums(numVaues):
     nums = []
 
-    for i in range(0, numVaues):
+    for i in range(numVaues):
         nums.append(float(
             input('\nPlease enter a float: ')
         ))
@@ -29,15 +34,15 @@ def input_nums(numVaues):
 def rev_order(arr):
     length = len(arr)
 
-    for i in range(1, length + 1):
-        print(formatToOneDec(arr[length - i]), '\n')
+    for i in range(length - 1, -1, -1):
+        print(formatToOneDec(arr[i]), '\n')
 
 
 def average(nums):
     total = 0.0
 
     for num in nums:
-        total = float(total + num)
+        total = total + num
 
     return total / len(nums)
 
@@ -65,13 +70,13 @@ def abo_bel_equ(nums):
 
 
 def hi_lo(nums):
-    lowest = None
-    highest = None
+    lowest = nums[0]
+    highest = nums[0]
 
     for num in nums:
-        if (lowest == None or num < lowest):
+        if (num < lowest):
             lowest = num
-        if (highest == None or num > highest):
+        if (num > highest):
             highest = num
 
     print('\nThe lowest number you inputted is:', formatToOneDec(lowest))
