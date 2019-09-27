@@ -30,7 +30,7 @@ def rev_order(arr):
     length = len(arr)
 
     for i in range(1, length + 1):
-        print(formatToOneDec(arr[length - i]))
+        print(formatToOneDec(arr[length - i]), '\n')
 
 
 def average(nums):
@@ -39,7 +39,7 @@ def average(nums):
     for num in nums:
         total = float(total + num)
 
-    return float(total / len(nums))
+    return total / len(nums)
 
 
 def abo_bel_equ(nums):
@@ -71,7 +71,7 @@ def hi_lo(nums):
     for num in nums:
         if (lowest == None or num < lowest):
             lowest = num
-        elif (highest == None or num > highest):
+        if (highest == None or num > highest):
             highest = num
 
     print('\nThe lowest number you inputted is:', formatToOneDec(lowest))
@@ -83,6 +83,8 @@ def main():
     print('\n')
 
     nums = input_nums(get_num_values())
+
+    print('\nIn reverse order:\n')
 
     rev_order(nums)
 
