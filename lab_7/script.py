@@ -75,7 +75,7 @@ def factorial(integer: int) -> int:
 
 
 def getIntegerInput() -> int:
-    output = None
+    output = input('Please input an integer:\n')
 
     while (isInt(output) == False):
         inputValue = input('Please input an integer:\n')
@@ -94,18 +94,15 @@ def partOne():
     min = None
     max = None
 
-    negativeInput = False
+    integer = getIntegerInput()
 
-    while(negativeInput == False):
+    while(integer >= 0):
         integer = getIntegerInput()
 
-        if (integer < 0):
-            negativeInput = True
-        else:
-            sum += integer
-            validInputs += 1
-            max = calculateMax(max, integer)
-            min = calculateMin(min, integer)
+        sum += integer
+        validInputs += 1
+        max = calculateMax(max, integer)
+        min = calculateMin(min, integer)
 
     if (validInputs > 0):
         print('\nThe sum of all non-negative integers is: ', sum)
