@@ -3,11 +3,11 @@
 # Lab 11
 
 
-def histogram(s):
+def histogram(string):
     dictionary = dict()
 
-    for c in s:
-        dictionary[c] = dictionary.get(c, 0) + 1
+    for char in string:
+        dictionary[char] = dictionary.get(char, 0) + 1
 
     return dictionary
 
@@ -20,6 +20,13 @@ def reverse_lookup(dictionary, value):
             keys.append(key)
 
     return keys
+
+
+# I know prints shouldn't normally go in a function,
+# but I wanted to show that the memo is working.
+# I couldn't figure out how to do that w/o returning an array containing the value
+# and a boolean to indicate whether the value was in the memo
+# like so [value : int, inMemo : bool]
 
 
 def factorial(n, known={1: 1}):
