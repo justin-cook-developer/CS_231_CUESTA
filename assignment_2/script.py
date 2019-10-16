@@ -105,7 +105,7 @@ def standard_deviation(nums, average):
 
 # side affect functions
 def get_num_of_temps():
-    base_msg = 'Please enter the number of fahrenheit values you wish to input, between 1 and 3, inclusive: '
+    base_msg = 'Please enter the number of fahrenheit values you wish to input, between 1 and 35, inclusive: '
 
     num_temps = int(input(base_msg))
 
@@ -128,3 +128,48 @@ def get_single_temp():
         )
 
     return temp
+
+
+def main(
+    get_num_of_temps, get_single_temp, merge_sort, fahrenheit_to_celsius,
+    average, below_equal_above_avg, standard_deviation
+):
+    num_temps = get_num_of_temps()
+
+    temps = []
+
+    for k in range(num_temps):
+        temps.append(get_single_temp())
+
+    sorted_temps = merge_sort(temps)
+
+    for temp in sorted_temps:
+        print('temp f : c', temp, fahrenheit_to_celsius(temp))
+
+    fahr_avg = average(sorted_temps)
+
+    print('averages f : c', fahr_avg, fahrenheit_to_celsius(fahr_avg))
+
+    print(
+        'high f : c', sorted_temps[-1],
+        fahrenheit_to_celsius(sorted_temps[-1])
+    )
+
+    print(
+        'low f : c', sorted_temps[0],
+        fahrenheit_to_celsius(sorted_temps[0])
+    )
+
+    (below, equal, above) = below_equal_above_avg(sorted_temps, fahr_avg)
+
+    print('below', below)
+    print('equal', equal)
+    print('above', above)
+
+    print('std dev', standard_deviation(sorted_temps, fahr_avg))
+
+
+main(
+    get_num_of_temps, get_single_temp, merge_sort, fahrenheit_to_celsius,
+    average, below_equal_above_avg, standard_deviation
+)
