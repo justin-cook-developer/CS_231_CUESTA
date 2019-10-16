@@ -1,6 +1,8 @@
 from math import inf, floor, sqrt
 
 # pure functions
+
+
 def split(arr):
     middle = floor(len(arr) / 2)
 
@@ -102,3 +104,27 @@ def standard_deviation(nums, average):
 
 
 # side affect functions
+def get_num_of_temps():
+    base_msg = 'Please enter the number of fahrenheit values you wish to input, between 1 and 3, inclusive: '
+
+    num_temps = int(input(base_msg))
+
+    while (num_temps < 1 or num_temps > 35):
+        num_temps = int(input(
+            'The value you entered is outside the accepted range. ' + base_msg
+        ))
+
+    return num_temps
+
+
+def get_single_temp():
+    base_msg = 'Please enter a fahrenheit temperature between -150.0 and 150.0, inclusive, note values can be floats: '
+
+    temp = float(input(base_msg))
+
+    while(temp < -150.0 or temp > 150.0):
+        temp = float(
+            input('The value you entered is outside the accepted range. ' + base_msg)
+        )
+
+    return temp
