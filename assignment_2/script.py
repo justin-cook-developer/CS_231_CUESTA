@@ -80,8 +80,10 @@ def below_equal_above_avg(nums, avg):
     return (below, equal, above)
 
 
-# account for zero denom
 def standard_deviation(nums, average):
+    if (len(nums) == 1):
+        return 0
+
     sum_of_vals_from_mean_squared = 0.0
 
     for num in nums:
@@ -130,6 +132,9 @@ def main(
 
     sorted_temps = merge_sort(temps)
 
+    header = 'CIS 231 - Assignment 2 - Justin Cook'
+    print(header.rjust(len(header) + 20), '\n')
+
     print('{:>30} {:>10}'.format('FAHR', 'CELS'))
     print('{:>30} {:>10}'.format('====', '===='))
 
@@ -137,7 +142,7 @@ def main(
         print('{:>30} {:>10}'.format(
             "{:.1f}".format(temp),
             "{:.1f}".format(fahrenheit_to_celsius(temp)
-    )))
+                            )))
 
     print('{:>30} {:>10}'.format('====', '===='))
 
@@ -164,7 +169,8 @@ def main(
     print('Equal to Average: {:>10}'.format(equal))
     print('Below to Average: {:>10}'.format(below))
 
-    print('\nStandard Deviation: {:>10}'.format("{:.1f}".format(standard_deviation(sorted_temps, fahr_avg))))
+    print('\nStandard Deviation: {:>10}'.format(
+        "{:.1f}".format(standard_deviation(sorted_temps, fahr_avg))))
 
 
 main(
