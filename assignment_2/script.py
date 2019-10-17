@@ -55,20 +55,6 @@ def fahrenheit_to_celsius(fahr):
     return (fahr - 32) * (5 / 9)
 
 
-# likely unecessary, can index into sorted array
-def min_and_max(nums):
-    highest = -inf
-    lowest = inf
-
-    for num in nums:
-        if num > highest:
-            highest = num
-        elif num < lowest:
-            lowest = num
-
-    return (lowest, highest)
-
-
 def average(nums):
     total = 0.0
 
@@ -94,6 +80,7 @@ def below_equal_above_avg(nums, avg):
     return (below, equal, above)
 
 
+# account for zero denom
 def standard_deviation(nums, average):
     sum_of_vals_from_mean_squared = 0.0
 
@@ -143,30 +130,41 @@ def main(
 
     sorted_temps = merge_sort(temps)
 
+    print('{:>30} {:>10}'.format('FAHR', 'CELS'))
+    print('{:>30} {:>10}'.format('====', '===='))
+
     for temp in sorted_temps:
-        print('temp f : c', temp, fahrenheit_to_celsius(temp))
+        print('{:>30} {:>10}'.format(
+            "{:.1f}".format(temp),
+            "{:.1f}".format(fahrenheit_to_celsius(temp)
+    )))
+
+    print('{:>30} {:>10}'.format('====', '===='))
 
     fahr_avg = average(sorted_temps)
 
-    print('averages f : c', fahr_avg, fahrenheit_to_celsius(fahr_avg))
+    print('\nAverage: {:>21} {:>10}'.format(
+        "{:.1f}".format(fahr_avg),
+        "{:.1f}".format(fahrenheit_to_celsius(fahr_avg))
+    ))
 
-    print(
-        'high f : c', sorted_temps[-1],
-        fahrenheit_to_celsius(sorted_temps[-1])
-    )
+    print('\nHigh: {:>24} {:>10}'.format(
+        "{:.1f}".format(sorted_temps[-1]),
+        "{:.1f}".format(fahrenheit_to_celsius(sorted_temps[-1]))
+    ))
 
-    print(
-        'low f : c', sorted_temps[0],
-        fahrenheit_to_celsius(sorted_temps[0])
-    )
+    print('\nLow: {:>25} {:>10}'.format(
+        "{:.1f}".format(sorted_temps[0]),
+        "{:.1f}".format(fahrenheit_to_celsius(sorted_temps[0]))
+    ))
 
     (below, equal, above) = below_equal_above_avg(sorted_temps, fahr_avg)
 
-    print('below', below)
-    print('equal', equal)
-    print('above', above)
+    print('\nAbove Average: {:>13}'.format(above))
+    print('Equal to Average: {:>10}'.format(equal))
+    print('Below to Average: {:>10}'.format(below))
 
-    print('std dev', standard_deviation(sorted_temps, fahr_avg))
+    print('\nStandard Deviation: {:>10}'.format("{:.1f}".format(standard_deviation(sorted_temps, fahr_avg))))
 
 
 main(
