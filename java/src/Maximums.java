@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Maximums {
     private static int maximum(int num1, int num2, int num3) {
         if (num1 >= num2 && num1 >= num3) {
@@ -10,6 +12,14 @@ public class Maximums {
     }
 
     public static void main( String [] args) {
-        System.out.println(maximum(1, 4, 2));
+        Scanner myScanner = new Scanner(System.in);
+
+        System.out.println("Enter a number:");
+
+        String strNum = myScanner.nextLine();
+
+        int inputNum = Integer.parseInt(strNum);
+
+        System.out.println(maximum(inputNum, 4, 2));
     }
 }
