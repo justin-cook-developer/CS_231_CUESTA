@@ -1,5 +1,5 @@
 def split(arr):
-    middle = floor(len(arr) / 2)
+    middle = len(arr) // 2
 
     return (arr[0:middle], arr[middle:])
 

@@ -6,17 +6,52 @@ from math import inf, floor, sqrt
 
 
 # pure functions
-def selectionSort(list):
-    for i in range(len(list) - 1):
-        minIndex = i
+def split(arr):
+    middle = len(arr) // 2
 
-        for j in range(i + 1, len(list)):
-            if list[j] < list[minIndex]:
-                minIndex = j
+    return (arr[0:middle], arr[middle:])
 
-        temp = list[minIndex]
-        list[minIndex] = list[i]
-        list[i] = temp
+
+def merge(left, right):
+    merged = [0] * (len(left) + len(right))
+
+    i = 0
+    j = 0
+    k = 0
+
+    while (i < len(left) and j < len(right)):
+        if (left[i] <= right[j]):
+            merged[k] = left[i]
+            i += 1
+        else:
+            merged[k] = right[j]
+            j += 1
+
+        k += 1
+
+    while (i < len(left)):
+        merged[k] = left[i]
+        k += 1
+        i += 1
+
+    while (j < len(right)):
+        merged[k] = right[j]
+        k += 1
+        j += 1
+
+    return merged
+
+
+def merge_sort(arr):
+    if (len(arr) <= 1):
+        return arr
+    else:
+        (left, right) = split(arr)
+
+        return merge(
+            merge_sort(left),
+            merge_sort(right)
+        )
 
 
 def fahrenheit_to_celsius(fahr):
@@ -89,7 +124,7 @@ def get_single_temp():
 
 # main program: tie all of the pieces together
 def main(
-    get_num_of_temps, get_single_temp, selectionSort, fahrenheit_to_celsius,
+    get_num_of_temps, get_single_temp, merge_sort, fahrenheit_to_celsius,
     average, below_equal_above_avg, standard_deviation
 ):
     num_temps = get_num_of_temps()
@@ -99,7 +134,7 @@ def main(
     for k in range(num_temps):
         temps.append(get_single_temp())
 
-    selectionSort(temps)
+    sorted_temps = merge_sort(temps)
 
     header = 'CIS 231 - Assignment 2 - Justin Cook'
     print(header.rjust(len(header) + 20), '\n')
@@ -107,15 +142,15 @@ def main(
     print('{:>30} {:>10}'.format('FAHR', 'CELS'))
     print('\n{:>30} {:>10}'.format('====', '===='))
 
-    for temp in temps:
+    for temp in sorted_temps:
         print('{:>30} {:>10}'.format(
             "{:.1f}".format(temp),
             "{:.1f}".format(fahrenheit_to_celsius(temp)
-                            )))
+        )))
 
     print('{:>30} {:>10}'.format('====', '===='))
 
-    fahr_avg = average(temps)
+    fahr_avg = average(sorted_temps)
 
     print('\nAverage: {:>21} {:>10}'.format(
         "{:.1f}".format(fahr_avg),
@@ -123,27 +158,27 @@ def main(
     ))
 
     print('\nHigh: {:>24} {:>10}'.format(
-        "{:.1f}".format(temps[-1]),
-        "{:.1f}".format(fahrenheit_to_celsius(temps[-1]))
+        "{:.1f}".format(sorted_temps[-1]),
+        "{:.1f}".format(fahrenheit_to_celsius(sorted_temps[-1]))
     ))
 
     print('\nLow: {:>25} {:>10}'.format(
-        "{:.1f}".format(temps[0]),
-        "{:.1f}".format(fahrenheit_to_celsius(temps[0]))
+        "{:.1f}".format(sorted_temps[0]),
+        "{:.1f}".format(fahrenheit_to_celsius(sorted_temps[0]))
     ))
 
-    (below, equal, above) = below_equal_above_avg(temps, fahr_avg)
+    (below, equal, above) = below_equal_above_avg(sorted_temps, fahr_avg)
 
     print('\nAbove Average: {:>13}'.format(above))
     print('Equal to Average: {:>10}'.format(equal))
     print('Below to Average: {:>10}'.format(below))
 
     print('\nStandard Deviation: {:>10}'.format(
-        "{:.1f}".format(standard_deviation(temps, fahr_avg)
-                        )))
+        "{:.1f}".format(standard_deviation(sorted_temps, fahr_avg)
+    )))
 
 
 main(
-    get_num_of_temps, get_single_temp, selectionSort, fahrenheit_to_celsius,
+    get_num_of_temps, get_single_temp, merge_sort, fahrenheit_to_celsius,
     average, below_equal_above_avg, standard_deviation
 )
