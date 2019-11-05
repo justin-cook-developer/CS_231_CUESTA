@@ -1,0 +1,74 @@
+{
+  "date": {
+    "epoch": "1524276000",
+    "pretty": "7:00 PM PDT on April 20, 2018",
+    "day": 20,
+    "month": 4,
+    "year": 2018,
+    "yday": 109,
+    "hour": 19,
+    "min": "00",
+    "sec": 0,
+    "isdst": "1",
+    "monthname": "April",
+    "monthname_short": "Apr",
+    "weekday_short": "Fri",
+    "weekday": "Friday",
+    "ampm": "PM",
+    "tz_short": "PDT",
+    "tz_long": "America\/Los_Angeles"
+  },
+  "period": 1,
+  "high": {
+    "fahrenheit": "68",
+    "celsius": "20"
+  },
+  "low": {
+    "fahrenheit": "50",
+    "celsius": "10"
+  },
+  "conditions": "Clear",
+  "icon": "clear",
+  "icon_url": "http:\/\/icons.wxug.com\/i\/c\/k\/clear.gif",
+  "skyicon": "",
+  "pop": 0,
+  "qpf_allday": {
+    "in": 0,
+    "mm": 0
+  },
+  "qpf_day": {
+    "in": null,
+    "mm": null
+  },
+  "qpf_night": {
+    "in": 0,
+    "mm": 0
+  },
+  "snow_allday": {
+    "in": 0,
+    "cm": 0
+  },
+  "snow_day": {
+    "in": null,
+    "cm": null
+  },
+  "snow_night": {
+    "in": 0,
+    "cm": 0
+  },
+  "maxwind": {
+    "mph": 24,
+    "kph": 39,
+    "dir": "NW",
+    "degrees": 0
+  },
+  "avewind": {
+    "mph": 7,
+    "kph": 11,
+    "dir": "NW",
+    "degrees": 0
+  },
+  "avehumidity": 80,
+  "maxhumidity": 0,
+  "minhumidity": 0
+}
