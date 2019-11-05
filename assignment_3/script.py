@@ -7,6 +7,7 @@ jsonFile.close()
 simpleforecast = data['forecast']['simpleforecast']['forecastday']
 
 
+# print functions
 def printDateInfo(date):
     message_template = "This is the data for {}, {} {} {}."
     print(message_template.format(
@@ -43,12 +44,14 @@ def printForecastData(forecast):
 
 
 def printForecasts(forecasts):
-    for forecast in forecasts:
-        print("------------------")
-        printForecastData(forecast)
-        print()
+    for i in range(0, len(forecasts)):
+        printForecastData(forecasts[i])
+
+        if i != len(forecasts) - 1:
+            print("\n------------------\n")
 
 
+# non side affect functions
 def findHighestAndLowestTempForecasts(forecasts):
     if (len(forecasts) == 0):
         return None
@@ -98,4 +101,33 @@ def listMostCommonConditions(frequencies):
     return items
 
 
-print(listMostCommonConditions(conditionsFrequencies(simpleforecast)))
+def main(forecasts):
+    print("------ ** Here is a day by day summary ** -----\n")
+
+    printForecasts(forecasts)
+
+    print("\n------ ** Here are the highest and lowest temperatures. ** -----\n")
+
+    (minForecast, maxForecast) = findHighestAndLowestTempForecasts(forecasts)
+
+    printHighAndLowTemps(maxForecast["high"], minForecast["low"])
+
+    print("\n------ ** Here are the average high and low temperatures. ** -----\n")
+
+    (lowAvg, highAvg) = avgHighAndLow(forecasts)
+
+    print("In Fahrenheit, the average high is {} and the average low is {}.".format(
+        highAvg, lowAvg))
+
+    print("\n------ ** Here are the most frequently occuring Conditions. ** -----\n")
+
+    conditions = listMostCommonConditions(conditionsFrequencies(forecasts))
+
+    print("From most frequent to least frequent:\n")
+
+    for condition in conditions:
+      print(condition[0] + '\n')
+
+
+
+main(simpleforecast)
