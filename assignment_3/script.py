@@ -1,3 +1,7 @@
+# CIS 231 / Scovil
+# Assignment 3
+# Justin Cook / justin_cook3@my.cuesta.edu
+
 import json
 
 jsonFile = open('WU-SLO-forecast-10day.json', 'r')
@@ -8,6 +12,12 @@ simpleforecast = data['forecast']['simpleforecast']['forecastday']
 
 
 # print functions
+def printMyInfo(forecasts):
+    message_template = "Assignment 3 - SLO 10-Day Forecast Summary for {} through {}.\n"
+    print(message_template.format(
+        forecasts[0]["date"]["pretty"], forecasts[len(forecasts) - 1]["date"]["pretty"]))
+
+
 def printDateInfo(date):
     message_template = "This is the data for {}, {} {} {}."
     print(message_template.format(
@@ -15,24 +25,24 @@ def printDateInfo(date):
 
 
 def printTodaysConditions(condition):
-    message_template = "The conditions are {}."
-    print(message_template.format(condition.lower()))
+    message_template = "Conditions: {:>22}{}"
+    print(message_template.format(" ", condition))
 
 
 def printHighAndLowTemps(high, low):
-    message_template = "In the format of (fahrenheit, celsius), the high is ({}, {}) and the low is ({}, {})."
-
-    print(message_template.format(
-        high["fahrenheit"], high["celsius"], low["fahrenheit"], low["celsius"]))
+    print("High: {:>30}ºF or {}ºC".format(
+        high["fahrenheit"], high["celsius"]))
+    print("Low: {:>31}ºF or {}ºC".format(
+        low["fahrenheit"], low["celsius"]))
 
 
 def printWindInfo(avewind):
-    message_template = "The wind is moving {} at {} mph."
-    print(message_template.format(avewind["dir"], avewind["mph"]))
+    print("Avg wind speed (mph): {:>14}".format(avewind["mph"]))
+    print("Wind direction: {:>18}{}".format(" ", avewind["dir"]))
 
 
 def printAvgHumidity(humidity):
-    print("The average humidity is {}.".format(humidity))
+    print("Avg humidity: {:>22}".format(humidity))
 
 
 def printForecastData(forecast):
@@ -44,11 +54,33 @@ def printForecastData(forecast):
 
 
 def printForecasts(forecasts):
+    print("------ ** Here is a day by day summary ** ------\n")
+
     for i in range(0, len(forecasts)):
         printForecastData(forecasts[i])
 
         if i != len(forecasts) - 1:
-            print("\n------------------\n")
+            print()
+
+
+def printHighestAndLowest(high, low):
+    print("\n------ ** Here are the highest and lowest temperatures. ** -----\n")
+
+    printHighAndLowTemps(high, low)
+
+
+def printAverageHighLow(highAvg, lowAvg):
+    print("\n------ ** Here are the average high and low temperatures. ** -----\n")
+
+    print("High: {:>32}ºF".format(highAvg))
+    print("Low: {:>33}ºF".format(lowAvg))
+
+
+def printMostFrequentCondititons(conditions):
+    print("\n------ ** Here are the most frequently occuring conditions, from most frequent to least frequent. ** -----\n")
+
+    for condition in conditions:
+        print(condition[0] + '\n')
 
 
 # non side affect functions
@@ -103,31 +135,21 @@ def listMostCommonConditions(frequencies):
 
 # main method
 def main(forecasts):
-    print("------ ** Here is a day by day summary ** -----\n")
+    printMyInfo(forecasts)
 
     printForecasts(forecasts)
 
-    print("\n------ ** Here are the highest and lowest temperatures. ** -----\n")
-
     (minForecast, maxForecast) = findHighestAndLowestTempForecasts(forecasts)
 
-    printHighAndLowTemps(maxForecast["high"], minForecast["low"])
-
-    print("\n------ ** Here are the average high and low temperatures. ** -----\n")
+    printHighestAndLowest(maxForecast["high"], minForecast["low"])
 
     (lowAvg, highAvg) = avgHighAndLow(forecasts)
 
-    print("In Fahrenheit, the average high is {} and the average low is {}.".format(
-        highAvg, lowAvg))
-
-    print("\n------ ** Here are the most frequently occuring Conditions. ** -----\n")
+    printAverageHighLow(highAvg, lowAvg)
 
     conditions = listMostCommonConditions(conditionsFrequencies(forecasts))
 
-    print("From most frequent to least frequent:\n")
-
-    for condition in conditions:
-      print(condition[0] + '\n')
+    printMostFrequentCondititons(conditions)
 
 
 # call main
