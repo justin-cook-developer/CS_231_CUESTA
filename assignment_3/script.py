@@ -101,6 +101,7 @@ def listMostCommonConditions(frequencies):
     return items
 
 
+# main method
 def main(forecasts):
     print("------ ** Here is a day by day summary ** -----\n")
 
@@ -129,5 +130,5 @@ def main(forecasts):
       print(condition[0] + '\n')
 
 
-
+# call main
 main(simpleforecast)
