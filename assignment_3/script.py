@@ -13,7 +13,7 @@ simpleforecast = data['forecast']['simpleforecast']['forecastday']
 
 # print functions
 def printMyInfo(forecasts):
-    message_template = "Assignment 3 - SLO 10-Day Forecast Summary for {} through {}.\n"
+    message_template = "Justin Cook - Assignment 3 - SLO 10-Day Forecast Summary for {} through {}.\n"
     print(message_template.format(
         forecasts[0]["date"]["pretty"], forecasts[len(forecasts) - 1]["date"]["pretty"]))
 
@@ -80,7 +80,7 @@ def printMostFrequentCondititons(conditions):
     print("\n------ ** Here are the most frequently occuring conditions, from most frequent to least frequent. ** -----\n")
 
     for condition in conditions:
-        print(condition[0] + '\n')
+        print(condition[0] + ": " + str(condition[1]) + '\n')
 
 
 # non side affect functions
